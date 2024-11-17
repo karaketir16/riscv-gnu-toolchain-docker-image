@@ -3,7 +3,9 @@ name: Docker
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs every night
-
+    
+  workflow_dispatch:  # Allow manual triggering
+  
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: riscv-toolchain-multilib
