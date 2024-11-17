@@ -43,5 +43,5 @@ riscv64-unknown-elf-gcov-dump   riscv64-unknown-linux-gnu-gcc-ar      riscv64-un
 You can run it with
 ```bash
 # that will connect your current dir as /workspace
-docker run --rm -it --network=host -v .:/workspace riscv-toolchain-multilib:v0.2 bash
+docker run --rm -it --network=host -v .:/workspace riscv-toolchain-multilib:latest bash
 ```
