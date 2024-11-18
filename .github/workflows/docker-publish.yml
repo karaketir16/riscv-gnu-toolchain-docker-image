@@ -8,7 +8,7 @@ on:
   
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: riscv-toolchain-multilib
+  IMAGE_NAME: karaketir16/riscv-toolchain-multilib
   TARGET_REPO: riscv-collab/riscv-gnu-toolchain
   TARGET_BRANCH: master
 
