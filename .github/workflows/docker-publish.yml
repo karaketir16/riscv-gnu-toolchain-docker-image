@@ -21,10 +21,7 @@ jobs:
       packages: write
       id-token: write
 
-    steps:
-      - name: Clean up Docker environment
-        run: docker system prune -af
-        
+    steps:       
       - name: Checkout this repository
         uses: actions/checkout@v4
 
