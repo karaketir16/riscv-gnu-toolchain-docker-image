@@ -39,10 +39,10 @@ RUN git clone --depth 1 https://github.com/riscv/riscv-gnu-toolchain /riscv-gnu-
 
 # Build the toolchain
 WORKDIR /riscv-gnu-toolchain
-# RUN ./configure --prefix=/opt/riscv --enable-multilib --enable-qemu-system && \
-#     make -j$(nproc) newlib linux build-sim SIM=qemu && \
-#     make install && \
-#     rm -rf /riscv-gnu-toolchain # Clean up to reduce image size
+RUN ./configure --prefix=/opt/riscv --enable-multilib --enable-qemu-system && \
+    make -j$(nproc) newlib linux build-sim SIM=qemu && \
+    make install && \
+    rm -rf /riscv-gnu-toolchain # Clean up to reduce image size
 
 # Set the PATH environment variable to include the RISC-V toolchain
 ENV PATH=/opt/riscv/bin:$PATH
