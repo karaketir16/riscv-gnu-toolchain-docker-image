@@ -68,6 +68,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
+        id: build-and-push  # Add an ID to capture outputs
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -81,4 +82,9 @@ jobs:
         env:
           TAGS: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:temp
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
-        run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+        run: |
+          if [ -z "${DIGEST}" ]; then
+            echo "Error: DIGEST is empty."
+            exit 1
+          fi
+          echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
