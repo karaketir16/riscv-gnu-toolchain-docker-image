@@ -2,7 +2,7 @@ name: Docker
 
 on:
   schedule:
-    - cron: '0 0 * * 0'  # Runs every sunday
+    - cron: '0 0 * * 0'  # Runs every Sunday
     
   workflow_dispatch:  # Allow manual triggering
   
@@ -24,6 +24,13 @@ jobs:
     steps:       
       - name: Checkout this repository
         uses: actions/checkout@v4
+
+      - name: Restore commit cache
+        uses: actions/cache@v3
+        with:
+          path: latest_commit.txt
+          key: latest-commit-${{ env.TARGET_REPO }}
+          restore-keys: latest-commit-
 
       - name: Get latest commit from target repo
         id: get_latest_commit
@@ -88,3 +95,9 @@ jobs:
             exit 1
           fi
           echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+
+      - name: Cache the latest commit file
+        uses: actions/cache@v3
+        with:
+          path: latest_commit.txt
+          key: latest-commit-${{ env.TARGET_REPO }}
