@@ -49,6 +49,7 @@ jobs:
           echo "Previous commit: $PREV_COMMIT"
           echo "Latest commit: $LATEST_COMMIT"
           if [ "$LATEST_COMMIT" == "$PREV_COMMIT" ]; then
+            echo "No new commit. Exiting..."
             echo "changed=false" >> $GITHUB_OUTPUT
             exit 0
           fi
