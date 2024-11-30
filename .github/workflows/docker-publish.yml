@@ -89,6 +89,15 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          flavor: |
+            latest=true
+          tags: |
+            # minimal
+            type=schedule
+            # default
+            type=schedule,pattern=nightly
+            # handlebars
+            type=schedule,pattern={{date 'DD-MM-YYYY'}}
 
       - name: Build and push Docker image
         if: steps.check_commit.outputs.changed == 'true'
